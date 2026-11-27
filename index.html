@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="uz">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Qo'qon – Pochta va aloqa bo'limlari</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+      font-family: "Times New Roman", serif;
+    }
+
+    #header {
+      padding: 10px 16px;
+      background: #1f3b57;
+      color: #fff;
+    }
+
+    #header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    #header p {
+      margin: 4px 0 0;
+      font-size: 14px;
+      opacity: .9;
+    }
+
+    #map {
+      height: calc(100% - 64px);
+      width: 100%;
+    }
+
+    .legend {
+      background: #fff;
+      padding: 8px 10px;
+      line-height: 1.5;
+      font-size: 13px;
+      border-radius: 4px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+    }
+
+    .legend i {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-right: 6px;
+      vertical-align: middle;
+      border-radius: 50%;
+      border: 1px solid #555;
+    }
+
+    .popup-table td {
+      padding: 2px 6px;
+      font-size: 13px;
+      vertical-align: top;
+    }
+
+    .popup-table td:first-child {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .warn {
+      position: absolute;
+      z-index: 1000;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff3cd;
+      border: 1px solid #e0a800;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="header">
+    <h1>Qo'qon shahri – Pochta va aloqa bo'limlari (12 ta obyekt)</h1>
+    <p>Ko'rsatkich: bir kunlik ish vaqti (soat). Manba: OpenStreetMap / Google Maps / Yandex Maps / GoldenPages
+      (tekshirilgan).</p>
+  </div>
+  <div id="map"></div>
+  <div id="warn" class="warn">Ma'lumot kiritilmagan. Quyidagi <b>FEATURES</b> bo'limiga GeoJSON ma'lumotlarini
+    joylashtiring.</div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    /* ==========================================================
+       1-QADAM: GeoJSON ma'lumotlarini shu yerga joylashtiring.
+       Fayl (.geojson) ichidagi "features" massivining mazmunini
+       FEATURES o'rniga qo'ying. Masalan:
+    
+       const FEATURES = [
+         { "type": "Feature",
+           "geometry": { "type": "Point", "coordinates": [70.94217, 40.52864] },
+           "properties": {
+             "id": 1,
+             "nomi": "Obyekt nomi",
+             "turi": "Pochta bo'limi",
+             "manzili": "Ko'cha, uy",
+             "korsatkich": 8,
+             "manba": "OpenStreetMap, https://www.openstreetmap.org/..."
+           }
+         }
+       ];
+    
+       DIQQAT: GeoJSON'da koordinatalar tartibi [UZUNLIK, KENGLIK] (lon, lat).
+       ========================================================== */
+    const FEATURES = [
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [70.93468914223563, 40.5396131761714] },
+        "properties": {
+          "id": 1,
+          "nomi": "Qo'qon shahar pochta bo'limi (UzPost 7-sonli aloqa bo'limi)",
+          "turi": "Pochta bo'limi",
+          "manzili": "O'rda-To'g'i ko'chasi, 38-uy, Qo'qon, Farg'ona viloyati, 150700 (Plus code: GWQM+QVG)",
+          "korsatkich": 8,
+          "ish_vaqti": "Du–Ju: 09:00–18:00 (tushlik 13:00–14:00)",
+          "manba": "OpenStreetMap (way/451486763), Google Maps, GoldenPages"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [70.9623184612828, 40.55044758609876] },
+        "properties": {
+          "id": 2,
+          "nomi": "EMU Express pochta (Qo'qon Bozor filiali)",
+          "turi": "Pochta va kurerlik bo'limi",
+          "manzili": "Hunarmandlar bozori, Usmon Nosir ko'chasi, 67-uy, Qo'qon, Farg'ona viloyati, 150700",
+          "korsatkich": 9,
+          "ish_vaqti": "Du–Sha: 09:00–18:00",
+          "manba": "Google Maps, emu.uz"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [70.93567039800952, 40.543223995616685] },
+        "properties": {
+          "id": 3,
+          "nomi": "EMU Express pochta (Charxiy filiali)",
+          "turi": "Pochta va kurerlik bo'limi",
+          "manzili": "Asqarali Charxiy ko'chasi, 25J-uy, Qo'qon, Farg'ona viloyati (Plus code: GWVP+57)",
+          "korsatkich": 8,
+          "ish_vaqti": "Du–Sha: 09:00–18:00 (tushlik 13:00–14:00)",
+          "manba": "Google Maps, emu.uz"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [70.957852, 40.537451] },
+        "properties": {
+          "id": 4,
+          "nomi": "UzPost 1-sonli aloqa bo'limi (150701)",
+          "turi": "Pochta bo'limi",
+          "manzili": "Poyakilik ko'chasi, 1-uy, Qo'qon, Farg'ona viloyati, 150701",
+          "korsatkich": 7,
+          "ish_vaqti": "Du–Ju: 09:00–17:00 (tushlik 13:00–14:00); Sha: 09:00–15:00",
+          "manba": "Yandex Maps, GoldenPages"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [70.954654, 40.527458] },
+        "properties": {
+          "id": 5,
+          "nomi": "UzPost 5-sonli aloqa bo'limi (150705)",
+          "turi": "Pochta bo'limi",
+          "manzili": "Furqat ko'chasi, 67-uy, Qo'qon, Farg'ona viloyati, 150705",
+          "korsatkich": 7,
+          "ish_vaqti": "Du–Ju: 09:00–17:00 (tushlik 13:00–14:00); Sha: 09:00–15:00",
+          "manba": "Yandex Maps, GoldenPages"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [70.92784535387605, 40.52053306203872] },
+        "properties": {
+          "id": 6,
+          "nomi": "UzPost 8-sonli aloqa bo'limi (150708)",
+          "turi": "Pochta bo'limi",
+          "manzili": "Movarounnahr ko'chasi, 25/1-uy, Qo'qon, Farg'ona viloyati, 150708 (Plus code: GWCH+45H)",
+          "korsatkich": 7,
+          "ish_vaqti": "Du–Ju: 09:00–17:00 (tushlik 13:00–14:00); Sha: 09:00–15:00",
+          "manba": "Google Maps, Yandex Maps, GoldenPages"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [70.970582, 40.542605] },
+        "properties": {
+          "id": 7,
+          "nomi": "UzPost 12-sonli aloqa bo'limi (150712)",
+          "turi": "Pochta bo'limi",
+          "manzili": "Alisher Navoiy ko'chasi, 5-uy, Qo'qon, Farg'ona viloyati, 150712",
+          "korsatkich": 7,
+          "ish_vaqti": "Du–Ju: 09:00–17:00 (tushlik 13:00–14:00); Sha: 09:00–15:00",
+          "manba": "Yandex Maps, GoldenPages"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [70.9578449, 40.5357205] },
+        "properties": {
+          "id": 8,
+          "nomi": "BTS Express (Navoiy filiali)",
+          "turi": "Pochta va kurerlik bo'limi",
+          "manzili": "Alisher Navoiy ko'chasi, 64-uy, Qo'qon, Farg'ona viloyati, 150700",
+          "korsatkich": 9,
+          "ish_vaqti": "Du–Sha: 09:00–18:00; Ya: 09:00–16:00",
+          "manba": "OpenStreetMap (node/12484409060), bts.uz"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [70.947064, 40.519115] },
+        "properties": {
+          "id": 9,
+          "nomi": "BTS Express (Turkiston filiali)",
+          "turi": "Pochta va kurerlik bo'limi",
+          "manzili": "Turkiston ko'chasi, 220-uy, Qo'qon, Farg'ona viloyati, 150700",
+          "korsatkich": 13,
+          "ish_vaqti": "Du–Sha: 09:00–22:00; Ya: 09:00–16:00",
+          "manba": "OpenStreetMap (node/12484409061), bts.uz"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [70.94169680571447, 40.53705014759961] },
+        "properties": {
+          "id": 10,
+          "nomi": "Fargo pochta va kurerlik xizmati",
+          "turi": "Pochta va kurerlik bo'limi",
+          "manzili": "Qo'qon, Farg'ona viloyati, 150700 (Plus code: GWPR+MPJ)",
+          "korsatkich": 11,
+          "ish_vaqti": "Har kuni: 09:00–20:00",
+          "manba": "Google Maps, fargo.uz"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [70.9673833729233, 40.539767775757454] },
+        "properties": {
+          "id": 11,
+          "nomi": "EMU Express pochta (Navoiy 59B filiali)",
+          "turi": "Pochta va kurerlik bo'limi",
+          "manzili": "Alisher Navoiy ko'chasi, 59B-uy, Qo'qon, Farg'ona viloyati (Plus code: GXQ8+RW)",
+          "korsatkich": 9,
+          "ish_vaqti": "Du–Sha: 09:00–18:00",
+          "manba": "Google Maps, emu.uz"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [70.93639833059515, 40.537937569196245] },
+        "properties": {
+          "id": 12,
+          "nomi": "ZoodBox Uz0230 (Posilka avtomati)",
+          "turi": "Posilka avtomati (Pochta)",
+          "manzili": "Istiqlol ko'chasi, 12-uy, Qo'qon, Farg'ona viloyati, 150700 (Plus code: GWQP+2G)",
+          "korsatkich": 10,
+          "ish_vaqti": "Har kuni: 08:00–18:00 (bino ish rejimiga ko'ra)",
+          "manba": "Google Maps, Yandex Maps"
+        }
+      }
+    ];
+
+    /* Ko'rsatkich nomi (legenda va popup uchun) */
+    const KORSATKICH_NOMI = "bir kunlik ish vaqti (soat)";
+
+    /* Xarita markazi: Qo'qon shahri (taxminiy markaz) */
+    const MARKAZ = [40.5286, 70.9421];
+
+    /* ---------- Xarita ---------- */
+    const map = L.map('map').setView(MARKAZ, 13);
+
+    const osmDe = L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const esriStreet = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 19,
+      attribution: 'Tiles &copy; Esri'
+    });
+
+    const esriSat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 19,
+      attribution: 'Tiles &copy; Esri'
+    });
+
+    L.control.layers({
+      'Xarita (OpenStreetMap)': osmDe,
+      'Xarita (Esri Street)': esriStreet,
+      'Sun\'iy yo\'ldosh (Esri)': esriSat
+    }).addTo(map);
+
+    if (FEATURES.length === 0) {
+      document.getElementById('warn').style.display = 'block';
+    }
+
+    /* ---------- Rang shkalasi (5 ta sinf) ---------- */
+    const RANGLAR = ['#fef0d9', '#fdcc8a', '#fc8d59', '#e34a33', '#b30000'];
+
+    function sinfIndeksi(qiymat, min, max) {
+      if (max === min) return 2;
+      const ulush = (qiymat - min) / (max - min);
+      return Math.min(RANGLAR.length - 1, Math.floor(ulush * RANGLAR.length));
+    }
+
+    /* Min va max qiymatlarni hisoblash */
+    const qiymatlar = FEATURES.map(f => Number(f.properties.korsatkich)).filter(v => !isNaN(v));
+    const minQ = qiymatlar.length ? Math.min(...qiymatlar) : 0;
+    const maxQ = qiymatlar.length ? Math.max(...qiymatlar) : 1;
+
+    /* ---------- Obyektlarni chizish ---------- */
+    const qatlam = L.layerGroup().addTo(map);
+
+    FEATURES.forEach(f => {
+      const [lon, lat] = f.geometry.coordinates;
+      const p = f.properties;
+      const q = Number(p.korsatkich);
+      const idx = sinfIndeksi(q, minQ, maxQ);
+
+      const marker = L.circleMarker([lat, lon], {
+        radius: 10 + idx * 3,         // son ko'rsatkichga qarab o'lcham
+        color: '#000',                // chegara: och rangli belgilar ham ko'rinsin
+        weight: 2,
+        fillColor: RANGLAR[idx],      // son ko'rsatkichga qarab rang
+        fillOpacity: 0.9
+      });
+
+      marker.bindPopup(
+        `<table class="popup-table">
+       <tr><td>ID</td><td>${p.id ?? ''}</td></tr>
+       <tr><td>Nomi</td><td>${p.nomi ?? ''}</td></tr>
+       <tr><td>Turi</td><td>${p.turi ?? ''}</td></tr>
+       <tr><td>Manzili</td><td>${p.manzili ?? ''}</td></tr>
+       <tr><td>${KORSATKICH_NOMI}</td><td>${p.korsatkich ?? ''}</td></tr>
+       <tr><td>Ish vaqti</td><td>${p.ish_vaqti ?? ''}</td></tr>
+       <tr><td>Manba</td><td>${p.manba ?? ''}</td></tr>
+     </table>`
+      );
+      marker.addTo(qatlam);
+    });
+
+    if (FEATURES.length) {
+      map.fitBounds(qatlam.getBounds(), { padding: [30, 30] });
+    }
+
+    /* ---------- Legenda ---------- */
+    const legenda = L.control({ position: 'bottomright' });
+    legenda.onAdd = function () {
+      const div = L.DomUtil.create('div', 'legend');
+      let html = `<b>${KORSATKICH_NOMI}</b><br>`;
+      const qadam = (maxQ - minQ) / RANGLAR.length;
+      RANGLAR.forEach((r, i) => {
+        const a = (minQ + qadam * i).toFixed(1);
+        const b = (minQ + qadam * (i + 1)).toFixed(1);
+        html += `<i style="background:${r}"></i>${a} – ${b}<br>`;
+      });
+      html += `<hr style="margin:4px 0">Belgi o'lchami ham qiymatga bog'liq`;
+      div.innerHTML = html;
+      return div;
+    };
+    legenda.addTo(map);
+  </script>
+</body>
+
+</html>

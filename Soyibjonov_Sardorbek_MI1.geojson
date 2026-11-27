@@ -1,0 +1,197 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.93468914223563, 40.5396131761714]
+      },
+      "properties": {
+        "id": 1,
+        "nomi": "Qo'qon shahar pochta bo'limi (UzPost 7-sonli aloqa bo'limi)",
+        "turi": "Pochta bo'limi",
+        "manzili": "O'rda-To'g'i ko'chasi, 38-uy, Qo'qon, Farg'ona viloyati, 150700 (Plus code: GWQM+QVG)",
+        "korsatkich": 8,
+        "ish_vaqti": "Du–Ju: 09:00–18:00 (tushlik 13:00–14:00)",
+        "manba": "OpenStreetMap (way/451486763), Google Maps, GoldenPages"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.9623184612828, 40.55044758609876]
+      },
+      "properties": {
+        "id": 2,
+        "nomi": "EMU Express pochta (Qo'qon Bozor filiali)",
+        "turi": "Pochta va kurerlik bo'limi",
+        "manzili": "Hunarmandlar bozori, Usmon Nosir ko'chasi, 67-uy, Qo'qon, Farg'ona viloyati, 150700",
+        "korsatkich": 9,
+        "ish_vaqti": "Du–Sha: 09:00–18:00",
+        "manba": "Google Maps, emu.uz"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.93567039800952, 40.543223995616685]
+      },
+      "properties": {
+        "id": 3,
+        "nomi": "EMU Express pochta (Charxiy filiali)",
+        "turi": "Pochta va kurerlik bo'limi",
+        "manzili": "Asqarali Charxiy ko'chasi, 25J-uy, Qo'qon, Farg'ona viloyati (Plus code: GWVP+57)",
+        "korsatkich": 8,
+        "ish_vaqti": "Du–Sha: 09:00–18:00 (tushlik 13:00–14:00)",
+        "manba": "Google Maps, emu.uz"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.957852, 40.537451]
+      },
+      "properties": {
+        "id": 4,
+        "nomi": "UzPost 1-sonli aloqa bo'limi (150701)",
+        "turi": "Pochta bo'limi",
+        "manzili": "Poyakilik ko'chasi, 1-uy, Qo'qon, Farg'ona viloyati, 150701",
+        "korsatkich": 7,
+        "ish_vaqti": "Du–Ju: 09:00–17:00 (tushlik 13:00–14:00); Sha: 09:00–15:00",
+        "manba": "Yandex Maps, GoldenPages"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.954654, 40.527458]
+      },
+      "properties": {
+        "id": 5,
+        "nomi": "UzPost 5-sonli aloqa bo'limi (150705)",
+        "turi": "Pochta bo'limi",
+        "manzili": "Furqat ko'chasi, 67-uy, Qo'qon, Farg'ona viloyati, 150705",
+        "korsatkich": 7,
+        "ish_vaqti": "Du–Ju: 09:00–17:00 (tushlik 13:00–14:00); Sha: 09:00–15:00",
+        "manba": "Yandex Maps, GoldenPages"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.92784535387605, 40.52053306203872]
+      },
+      "properties": {
+        "id": 6,
+        "nomi": "UzPost 8-sonli aloqa bo'limi (150708)",
+        "turi": "Pochta bo'limi",
+        "manzili": "Movarounnahr ko'chasi, 25/1-uy, Qo'qon, Farg'ona viloyati, 150708 (Plus code: GWCH+45H)",
+        "korsatkich": 7,
+        "ish_vaqti": "Du–Ju: 09:00–17:00 (tushlik 13:00–14:00); Sha: 09:00–15:00",
+        "manba": "Google Maps, Yandex Maps, GoldenPages"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.970582, 40.542605]
+      },
+      "properties": {
+        "id": 7,
+        "nomi": "UzPost 12-sonli aloqa bo'limi (150712)",
+        "turi": "Pochta bo'limi",
+        "manzili": "Alisher Navoiy ko'chasi, 5-uy, Qo'qon, Farg'ona viloyati, 150712",
+        "korsatkich": 7,
+        "ish_vaqti": "Du–Ju: 09:00–17:00 (tushlik 13:00–14:00); Sha: 09:00–15:00",
+        "manba": "Yandex Maps, GoldenPages"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.9578449, 40.5357205]
+      },
+      "properties": {
+        "id": 8,
+        "nomi": "BTS Express (Navoiy filiali)",
+        "turi": "Pochta va kurerlik bo'limi",
+        "manzili": "Alisher Navoiy ko'chasi, 64-uy, Qo'qon, Farg'ona viloyati, 150700",
+        "korsatkich": 9,
+        "ish_vaqti": "Du–Sha: 09:00–18:00; Ya: 09:00–16:00",
+        "manba": "OpenStreetMap (node/12484409060), bts.uz"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.947064, 40.519115]
+      },
+      "properties": {
+        "id": 9,
+        "nomi": "BTS Express (Turkiston filiali)",
+        "turi": "Pochta va kurerlik bo'limi",
+        "manzili": "Turkiston ko'chasi, 220-uy, Qo'qon, Farg'ona viloyati, 150700",
+        "korsatkich": 13,
+        "ish_vaqti": "Du–Sha: 09:00–22:00; Ya: 09:00–16:00",
+        "manba": "OpenStreetMap (node/12484409061), bts.uz"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.94169680571447, 40.53705014759961]
+      },
+      "properties": {
+        "id": 10,
+        "nomi": "Fargo pochta va kurerlik xizmati",
+        "turi": "Pochta va kurerlik bo'limi",
+        "manzili": "Qo'qon, Farg'ona viloyati, 150700 (Plus code: GWPR+MPJ)",
+        "korsatkich": 11,
+        "ish_vaqti": "Har kuni: 09:00–20:00",
+        "manba": "Google Maps, fargo.uz"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.9673833729233, 40.539767775757454]
+      },
+      "properties": {
+        "id": 11,
+        "nomi": "EMU Express pochta (Navoiy 59B filiali)",
+        "turi": "Pochta va kurerlik bo'limi",
+        "manzili": "Alisher Navoiy ko'chasi, 59B-uy, Qo'qon, Farg'ona viloyati (Plus code: GXQ8+RW)",
+        "korsatkich": 9,
+        "ish_vaqti": "Du–Sha: 09:00–18:00",
+        "manba": "Google Maps, emu.uz"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.93639833059515, 40.537937569196245]
+      },
+      "properties": {
+        "id": 12,
+        "nomi": "ZoodBox Uz0230 (Posilka avtomati)",
+        "turi": "Posilka avtomati (Pochta)",
+        "manzili": "Istiqlol ko'chasi, 12-uy, Qo'qon, Farg'ona viloyati, 150700 (Plus code: GWQP+2G)",
+        "korsatkich": 10,
+        "ish_vaqti": "Har kuni: 08:00–18:00 (bino ish rejimiga ko'ra)",
+        "manba": "Google Maps, Yandex Maps"
+      }
+    }
+  ]
+}
