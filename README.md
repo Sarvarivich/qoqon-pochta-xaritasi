@@ -1,6 +1,6 @@
 # Qo'qon shahri – Pochta va aloqa bo'limlari xaritasi
 
-Ushbu loyihada Qo'qon shahridagi **12 ta** pochta va kurerlik bo'limlarining joylashuvi hamda kunlik ish vaqti (soat) interaktiv xarita ko'rinishida tasvirlangan.
+Ushbu loyihada Qo'qon shahridagi **12 ta** pochta bo'limlarining joylashuvi hamda kunlik ish vaqti (soat) interaktiv xarita ko'rinishida tasvirlangan.
 
 ## Fayllar
 - `index.html` / `Soyibjonov_Sardorbek_MI1_xarita.html` — Leaflet asosidagi interaktiv veb-xarita (OpenStreetMap, Esri Street va Sun'iy yo'ldosh qatlamlari bilan)
